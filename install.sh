@@ -40,8 +40,8 @@ setup_color() {
 }
 
 setup_ohmyzsh() {
-    if ! command_exists wget; then
-		echo "${YELLOW}Zsh is not installed.${RESET} Please install wget first."
+    if ! command_exists curl; then
+		echo "${YELLOW}Zsh is not installed.${RESET} Please install curl first."
 		exit 1
 	fi
     if ! command_exists unzip; then
@@ -53,7 +53,7 @@ setup_ohmyzsh() {
 
 	echo "${BLUE}Download Oh My Zsh...${RESET}"
 
-	wget "$REMOTE" -O "${FILE}.zip" || {
+	curl "$REMOTE" -o "${FILE}.zip" || {
 		error "Download oh-my-zsh failed"
 		exit 1
 	}
@@ -63,7 +63,7 @@ setup_ohmyzsh() {
 	rm -f "${FILE}.zip"
 
 	# replace upgrade.sh
-	wget https://raw.githubusercontent.com/felix-fly/openwrt-ohmyzsh/master/upgrade.sh -O "${ZSH}/tools/upgrade.sh"
+	curl https://raw.githubusercontent.com/aidenlx/openwrt-ohmyzsh/master/upgrade.sh -o "${ZSH}/tools/upgrade.sh"
 	# patch to check_for_upgrade.sh
 	sed -i '/^whence git.*/d' "${ZSH}/tools/check_for_upgrade.sh"
 

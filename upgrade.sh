@@ -3,7 +3,7 @@
 REMOTE=${REMOTE:-https://codeload.github.com/ohmyzsh/ohmyzsh/zip/master}
 FILE=${FILE:-ohmyzsh-master}
 
-wget "$REMOTE" -O "${FILE}.zip" || {
+curl "$REMOTE" -o "${FILE}.zip" || {
     printf "Update oh-my-zsh failed."
     exit 1
 }
@@ -21,7 +21,7 @@ mv "$FILE" "$ZSH"
 rm -f "${FILE}.zip"
 
 # replace upgrade.sh
-wget https://raw.githubusercontent.com/felix-fly/openwrt-ohmyzsh/master/upgrade.sh -O "${ZSH}/tools/upgrade.sh"
+curl https://raw.githubusercontent.com/aidenlx/openwrt-ohmyzsh/master/upgrade.sh -o "${ZSH}/tools/upgrade.sh"
 # patch to check_for_upgrade.sh
 sed -i '/^whence git.*/d' "${ZSH}/tools/check_for_upgrade.sh"
 # fix for remove lock file
